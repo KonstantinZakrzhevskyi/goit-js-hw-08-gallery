@@ -42,6 +42,7 @@ function toOpenModal(e) {
   modal.addEventListener('click', closeModalByClick);
   lightboxButton.addEventListener('click', closeModalByClick);
   window.addEventListener('keydown', closeModalByKey);
+  window.addEventListener('keydown', generateSlider);
 } 
 
 // Замена значения src
@@ -59,7 +60,8 @@ function toCloseModal() {
 
   modal.removeEventListener('click', closeModalByClick);
   lightboxButton.removeEventListener('click', closeModalByClick);
-  window.removeEventListener('keydown', closeModalByKey);
+  window.addEventListener('keydown', closeModalByKey);
+  window.removeEventListener('keydown', generateSlider);
 }
 
 function removeOriginalImage() {
@@ -84,29 +86,29 @@ function closeModalByKey(e) {
   
 }
 
-// function generateSlider(e) {
-//   e.code === 'ArrowRight' ? toRightArrowKey() : null;
-//   e.code === 'ArrowLeft' ? toLeftArrowKey() : null;
-// }
+function generateSlider(e) {
+  e.code === 'ArrowRight' ? toRightArrowKey() : null;
+  e.code === 'ArrowLeft' ? toLeftArrowKey() : null;
+}
 
-// function toRightArrowKey() {
-//   for (let i = 0; i < galleryItems.length; i
-//     += 1) {
-//     if(lightboxImage.getAttribute('src') === galleryItems.length[i].original) {
-//       lightboxImage.setAttribute('src', galleryItems.length[i + 1].original);
-//       lightboxImage.setAttribute('alt', galleryItems.length[i + 1].description);
-//       return
-//     }
-//   }
-// }
+function toRightArrowKey() {
+  for (let i = 0; i < galleryItems.length; i
+    += 1) {
+    if(lightboxImage.getAttribute('src') === galleryItems[i].original) {
+      lightboxImage.setAttribute('src', galleryItems[i + 1].original);
+      lightboxImage.setAttribute('alt', galleryItems[i + 1].description);
+      return
+    }
+  }
+}
 
-// function toLeftArrowKey() {
-//   for (let i = 0; i < galleryItems.length; i
-//     += 1) {
-//     if(lightboxImage.getAttribute('src') === galleryItems.length[i].original) {
-//       lightboxImage.setAttribute('src', galleryItems.length[i - 1].original);
-//       lightboxImage.setAttribute('alt', galleryItems.length[i - 1].description);
-//       return
-//     }
-//   }
-// }
+function toLeftArrowKey() {
+  for (let i = 0; i < galleryItems.length; i
+    += 1) {
+    if(lightboxImage.getAttribute('src') === galleryItems[i].original) {
+      lightboxImage.setAttribute('src', galleryItems[i - 1].original);
+      lightboxImage.setAttribute('alt', galleryItems[i - 1].description);
+      return
+    }
+  }
+}
